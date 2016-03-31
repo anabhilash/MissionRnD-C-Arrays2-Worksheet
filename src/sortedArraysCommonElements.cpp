@@ -24,6 +24,38 @@ struct transaction {
 	char description[20];
 };
 
-struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) 
+{
+	int i, j, k, found = 1, count = 0;
+	if (A == NULL || B == NULL || ALen <= 0 || BLen <= 0)
+		return NULL;
+	struct transaction *temp = NULL;
+
+	for (i = 0; i < ALen; i++)
+	{
+		for (j = 0; j < BLen; j++)
+		{
+			for (k = 0; k < 11; k++)
+			{
+				if ((A + i)->date[k] != (B + j)->date[k])
+				{
+					found = 0;
+					break;
+				}
+
+			}
+			if (found == 1)
+			{
+				temp = (struct transaction *)realloc(temp, sizeof(temp)*sizeof(struct transaction));
+				temp[count] = A[i];
+			    count++;
+			}
+			else
+				found = 1;
+		}
+	}
+	if (temp == NULL)
+		return NULL;
+	else
+		return temp;
 }
